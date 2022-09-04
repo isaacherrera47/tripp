@@ -5,6 +5,7 @@ import LoadingButton from '@mui/lab/LoadingButton';
 import SearchIcon from '@mui/icons-material/Search';
 import {Itinerary, ItineraryRequest, Place} from "../services/interfaces";
 import {fetchItinerary} from "../services/api";
+import {get, set} from "idb-keyval";
 
 interface Props {
   setItinerary: Dispatch<SetStateAction<Itinerary>>
@@ -16,15 +17,22 @@ const ItineraryForm: React.FC<Props> = ({setItinerary}) => {
   const [open, isOpen] = useState(false);
 
   const handleSubmitForm = async () => {
+    let result;
     isOpen(true);
-    const itineraryParams: ItineraryRequest = {
-      originState: originPlace.state,
-      originCity: originPlace.city,
-      destinationState: destinationPlace.state,
-      destinationCity: destinationPlace.city
+    result = await get<Itinerary>(`${originPlace.city}-${destinationPlace.city}`);
+
+    if (!result) {
+      const itineraryParams: ItineraryRequest = {
+        originState: originPlace.state,
+        originCity: originPlace.city,
+        destinationState: destinationPlace.state,
+        destinationCity: destinationPlace.city
+      }
+
+      result = await fetchItinerary(itineraryParams);
+      await set(`${originPlace.city}-${destinationPlace.city}`, result);
     }
 
-    const result = await fetchItinerary(itineraryParams);
     setItinerary(result);
     isOpen(false);
   }
