@@ -6,7 +6,7 @@ const Header: React.FC = () => {
       <Box sx={{textAlign: 'center'}}>
         <Avatar
             alt="tripp icon"
-            src="./favicon.png"
+            src="./logo.png"
             sx={{width: '100%', height:'auto', display: 'block'}}
         />
         <Typography variant="overline" gutterBottom>
