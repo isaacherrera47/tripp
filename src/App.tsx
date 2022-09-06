@@ -7,7 +7,7 @@ import Header from "./components/Header";
 import UnsupportedPlatform from "./components/UnsupportedPlatform";
 
 const isMobile = () => {
-  return window.matchMedia("only screen and (max-width: 480px)").matches;
+  return window.matchMedia("only screen and (max-width: 760px)").matches;
 }
 const App: React.FC = () => {
   const [itinerary, setItinerary] = useState<Itinerary>({} as Itinerary);
