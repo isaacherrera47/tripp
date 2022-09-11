@@ -39,8 +39,8 @@ const ItineraryForm: React.FC<Props> = ({setItinerary}) => {
 
   return (
       <Fragment>
-        <CitySelector setPlace={setOriginPlace} helperTextState="Estado de origen" helperTextCity="Ciudad de origen"/>
-        <CitySelector setPlace={setDestinationPlace} helperTextState="Estado destino" helperTextCity="Ciudad destino"/>
+        <CitySelector setPlace={setOriginPlace} helperTextCity="Ciudad de origen"/>
+        <CitySelector setPlace={setDestinationPlace} helperTextCity="Ciudad destino"/>
         <Box sx={{textAlign: 'center'}}>
           <LoadingButton
               onClick={handleSubmitForm}
